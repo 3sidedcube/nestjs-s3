@@ -43,7 +43,7 @@ export class S3Service implements IS3Service {
             Bucket: this._S3Options.bucketName,
             Key: fileName,
             ContentType: fileType,
-            ACL: 'public-read',
+            ACL: this._S3Options.defaultObjectACL ?? 'public-read',
         };
 
         const signedUrl = await getSignedUrl(this.client, new PutObjectCommand(s3Params), {});
